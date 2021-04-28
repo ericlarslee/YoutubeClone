@@ -3,7 +3,7 @@ import React from 'react';
 const VideoResultList = (props) => {
     return (
         <ul>
-            {props.mapVideos()}
+            <li>{props.mapVideos}</li>
         </ul>
     );
 }
