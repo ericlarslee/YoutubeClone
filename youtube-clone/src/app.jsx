@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Search from './Search';
-import VideoPlayer from './components/VideoPlayer.js'
+import VideoPlayer from './components/VideoPlayer.js';
+import Video from './components/Video.js';
 
 import axios from 'axios';
 
@@ -25,22 +26,29 @@ class App extends Component {
         console.log(response.data)
         this.setState({
             videoResultList: response.data.items,
-        })
+        });
         console.log(this.state.videoResultList[0].id.videoId)
         const IDArray = this.state.videoResultList.map(x => x.id.videoId);
         console.log(IDArray)
         this.setState({
             videoIdList:IDArray
-        })
-        console.log(this.state.videoIdList)
-    }
+        });
+        let detailedResultList = this.state.videoIdList.map(async(x) => await axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=id%2C%20snippet&id=${x}&key=AIzaSyAQpaNvVuucNcZowsZ6WDwXvsHoUQPI86E`));
+        console.log(detailedResultList);
+        detailedResultList = await Promise.all(detailedResultList);
+        console.log(detailedResultList);
 
-    // mapVidoes(){
-    //     return this.state.videoResultList.index.map(videoResultList=>
-    //         <List
-    //             key={videoResultList.id}
-    //             videoResultList={videoResultList}/>)
-    // }
+        console.log(detailedResultList);
+        console.log(detailedResultList.data);
+    }
+    mapVideos(entry){
+        return entry.map(video =>
+            <Video
+                key={video.id}
+                video={video}
+            />
+        )
+    }
 
     render() {
         return(

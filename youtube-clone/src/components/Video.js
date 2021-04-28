@@ -1,13 +1,10 @@
 import React from 'react';
 
-const Videos = () => {
+const Videos = (props) => {
     return (
-        <div className="video-list">
-            <div style={{padding: "20px"}}>
-                <h1 style={{textAlign: "center", fontSize: "15px", fontWeight:"bold"}}>
-                    Related Videos
-                </h1>
-            </div>
+        <div>
+            <image src={props.thumbnails.medium.url} /><br />
+            <h3>{props.title}</h3>
         </div>
     )
 }
