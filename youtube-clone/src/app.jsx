@@ -6,7 +6,7 @@ import axios from 'axios';
 
 class App extends Component {
     state = {
-        videoInfo:[],
+        videoIdList:[],
         searchVideoTerm:'',
         videoResultList:'',
         selectedVideo: null
@@ -22,21 +22,25 @@ class App extends Component {
     onSubmit = async (event) => {
         event.preventDefault();
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${this.state.searchVideoTerm}&key=AIzaSyAQpaNvVuucNcZowsZ6WDwXvsHoUQPI86E`)
+        console.log(response.data)
         this.setState({
             videoResultList: response.data.items,
         })
-        let responseOne = await axios. get (`https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${this.state.selectedVideo}&key=AIzaSyBoQ41RDkdAMnmcOq3cExX1Rx41RW7za3Q`)
-        console.log(this.state.videoResultList)
-        console.log(responseOne)
-        console.log(this.state.selectedVideo)
+        console.log(this.state.videoResultList[0].id.videoId)
+        const IDArray = this.state.videoResultList.map(x => x.id.videoId);
+        console.log(IDArray)
+        this.setState({
+            videoIdList:IDArray
+        })
+        console.log(this.state.videoIdList)
     }
 
-    mapVidoes(){
-        return this.state.videoResultList.index.map(videoResultList=>
-            <List
-                key={videoResultList.id}
-                videoResultList={videoResultList}/>)
-    }
+    // mapVidoes(){
+    //     return this.state.videoResultList.index.map(videoResultList=>
+    //         <List
+    //             key={videoResultList.id}
+    //             videoResultList={videoResultList}/>)
+    // }
 
     render() {
         return(
