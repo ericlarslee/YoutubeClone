@@ -3,8 +3,10 @@ import React from 'react';
 const Videos = (props) => {
     return (
         <div>
-            <image src={props.thumbnails.medium.url} /><br />
+        <li>
+            <img src={props.src} /><br />
             <h3>{props.title}</h3>
+        </li>
         </div>
     )
 }

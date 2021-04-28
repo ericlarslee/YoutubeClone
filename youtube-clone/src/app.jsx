@@ -33,8 +33,10 @@ class App extends Component {
     mapVideos(entry) {
         return entry.map(video =>
             <Videos
-                key={video.id}
+                key={video.id.etag}
                 video={video.snippet}
+                title={video.snippet.title}
+                src={video.snippet.thumbnails.medium.url}
             />
         );
     }
