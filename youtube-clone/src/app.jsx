@@ -10,7 +10,8 @@ class App extends Component {
     state = {
         searchVideoTerm:'',
         videoResultList:[],
-        selectedVideo: null
+        selectedVideo: null,
+        relatedVideos: []
     }
 
     handleChange = (event) => {
@@ -23,20 +24,28 @@ class App extends Component {
     onSubmit = async (event) => {
         event.preventDefault();
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${this.state.searchVideoTerm}&key=AIzaSyAQpaNvVuucNcZowsZ6WDwXvsHoUQPI86E`)
-        console.log(1);
-        console.log(response.data.items)
         this.setState({
             videoResultList: response.data.items,
         });
+    }
+
+    selectVideo = (video) => {
+        
+        this.setState({
+            selectedVideo:video,
+            videoResultList:[]
+        })
     }
         
     mapVideos(entry) {
         return entry.map(video =>
             <Videos
                 key={video.id.etag}
+                id={video.id.videoId}
                 video={video.snippet}
                 title={video.snippet.title}
                 src={video.snippet.thumbnails.medium.url}
+                selectVideo={() => this.selectVideo(video)}
             />
         );
     }
@@ -48,7 +57,7 @@ class App extends Component {
             <div>
                 <Search handleChange={this.handleChange} onSubmit={this.onSubmit}/>
                 <VideoResultList mapVideos={this.mapVideos(this.state.videoResultList)}  />
-                <VideoPlayer />
+                <VideoPlayer video={this.state.selectedVideo} />
             </div>
         );
     }
