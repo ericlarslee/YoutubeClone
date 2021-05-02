@@ -2,11 +2,9 @@ import React from 'react';
 
 const Videos = (props) => {
     return (
-        <div>
-        <li onClick={() => props.selectVideo(props.id)}>
-            <img src={props.src} /><br />
+        <div onClick={() => props.selectVideo(props.id)}>
+            <img src={props.src} alt='some video' /><br />
             <h3>{props.title}</h3>
-        </li>
         </div>
     )
 }

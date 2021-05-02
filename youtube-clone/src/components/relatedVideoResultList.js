@@ -1,6 +1,6 @@
 import React from 'react';
 
-const VideoResultList = (props) => {
+const RelatedVideoResultList = (props) => {
     return (
         <div>
             {props.mapVideos()}
@@ -8,4 +8,4 @@ const VideoResultList = (props) => {
     );
 }
 
-export default VideoResultList;
+export default RelatedVideoResultList;

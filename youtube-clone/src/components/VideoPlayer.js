@@ -1,9 +1,9 @@
 import React from 'react';
  
 const VideoPlayer = (props) => {
-  if(props.video === null) {
+  if(props.video === null || props.video.snippet === null) {
     return <div>
-      <h1>Video Player will go here</h1>
+
     </div>
   }
 return (
