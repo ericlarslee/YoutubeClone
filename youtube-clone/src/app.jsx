@@ -8,7 +8,7 @@ import axios from 'axios';
 import KEY from './api/youtubeKey.js';
 import Comment from './components/comment.js';
 import CommentList from './components/commentList.js';
-// import CommentForm from './components/commentForm.js';
+import CommentForm from './components/commentForm.js';
 
 // const apiKEY=KEY;
 
@@ -16,7 +16,6 @@ class App extends Component {
     state = {
         searchVideoTerm:'',
         videoResultList:[],
-        tempSelectedVideo: [],
         selectedVideo: null,
         relatedVideos: [],
         commentsData:[],
